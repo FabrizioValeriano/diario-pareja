@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alguien Especial ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #fff5f5;
+            color: #4a4a4a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        .counter-box {
+            background: #fff0f0;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 1px dashed #ffb3b3;
+        }
+
+        .counter-box h3 {
+            font-size: 2.5rem;
+            color: #ff4757;
+        }
+
+        .gallery {
+            margin-top: 20px;
+        }
+
+        .photo-card {
+            background: #fcfcfc;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .photo-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .photo-card img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .photo-card p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .btn-aventura {
+            width: 100%;
+            border: 2px dashed #ffb3b3;
+            background: #fffafb;
+            border-radius: 15px;
+            padding: 40px 20px;
+            color: #ff6b6b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .btn-aventura:hover {
+            background: #fff0f2;
+            transform: scale(1.01);
+        }
+
+        /* Ventanas flotantes (Modales) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 360px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .modal-content label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #666;
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .modal-content input[type="text"], 
+        .modal-content input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-submit {
+            flex: 1; background: #ff6b6b; color: white; border: none;
+            padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
+        }
+
+        .btn-cancel {
+            background: #eee; color: #666; border: none;
+            padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* 🎵 PLAYLIST PLAY/PAUSE INTERACTIVA 🎵 */
+        .playlist-menu {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 290px;
+            max-height: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 1500;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #ffe3e3;
+            
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+
+        .playlist-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .playlist-header {
+            background: #fff0f0;
+            padding: 12px;
+            font-weight: bold;
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ffb3b3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .playlist-items {
+            overflow-y: auto;
+            flex: 1;
+            padding: 5px 0;
+            text-align: left;
+        }
+
+        .song-item {
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .song-info {
+            flex: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .song-item:hover {
+            background: #fff5f5;
+        }
+
+        .song-item.active {
+            background: #ffe8e8;
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        .btn-play-pause-item {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <!-- Carga del SDK de Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <audio id="musica-fondo" loop></audio>
+
+    <!-- 🎵 PLAYLIST MENÚ 🎵 -->
+    <div class="playlist-menu" id="menuPlaylist">
+        <div class="playlist-header">
+            <span>Nuestras Canciones ❤️</span>
+        </div>
+        <div class="playlist-items" id="listaCanciones"></div>
+    </div>
+
+    <!-- Botón Flotante Principal -->
+    <button id="btn-musica" style="
+        position: fixed; bottom: 20px; right: 20px;
+        background: #ff6b6b; color: white; border: none;
+        border-radius: 50%; width: 60px; height: 60px; font-size: 1.6rem;
+        cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000;
+        display: flex; align-items: center; justify-content: center;
+        transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
+    ">🎵</button>
+
+    <div class="container">
+        <h1>Un pequeño detalle... ✨</h1>
+        <p class="subtitle">De los mejores días y contando.</p>
+
+        <div class="counter-box">
+            <h3 id="dias">0</h3>
+            <p>Días desde nuestro primer beso.... Y aún no te aburres de mí XD (Mentira mi amor, no me dejes)</p>
+        </div>
+
+        <div class="gallery" id="contenedor-galeria">
+            <div class="photo-card">
+                <img src="assets/img/foto1.jpeg" alt="Caminata">
+                <p>📍 Una caminata juntos por la noche.</p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Agarrados de las manos.</p>
+            </div>
+            <div class="photo-card">
+                <img src="assets/img/foto2.jpeg" alt="Comiendo">
+                <p>🍔 Sentados.</p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">3 horas decidiendo qué comer.</p>
+            </div>
+            <div class="photo-card">
+                <img src="assets/img/foto3.jpeg" alt="Parque">
+                <p>🌳 Primera salida al parque.</p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">No quería dejar de abrazarte ✨</p>
+            </div>
+            <div class="photo-card">
+                <img src="assets/img/foto4.jpeg" alt="Polera">
+                <p>👕 Tú con mi polera.</p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Te queda mil veces mejor que a mí. ❤️</p>
+            </div>
+            <div class="photo-card">
+                <img src="assets/img/foto5.jpeg" alt="Bus">
+                <p>🚌 Viajando en bus juntos.</p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Cualquier viaje es corto si es contigo. 🗺️</p>
+            </div>
+
+            <!-- Aquí aparecerán las fotos subidas a Supabase -->
+            <div id="fotos-dinamicas"></div>
+
+            <button class="btn-aventura" id="btnAbrirNuevaAventura">
+                [ Espacio reservado para nuestra próxima aventura ]
+            </button>
+        </div>
+        <p class="footer-note">Hecho con amor y paciencia ❤️.</p>
+    </div>
+
+    <!-- Formulario Aventuras -->
+    <div class="modal" id="modalAventura">
+        <div class="modal-content">
+            <h3>Nueva Aventura ❤️</h3>
+            <label>Selecciona la foto:</label>
+            <input type="file" id="inputFoto" accept="image/*">
+            <label>Título:</label>
+            <input type="text" id="inputTitulo" placeholder="¿Qué estaban haciendo?">
+            <label>Subtítulo o frase corta:</label>
+            <input type="text" id="inputSubtitulo" placeholder="Dedícale unas palabras...">
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="btnCancelarModal">Cancelar</button>
+                <button class="btn-submit" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🔑 CONFIGURACIÓN CON SUPABASE
+        const SUPABASE_URL = "https://jesmcfekvsaddcijocfd.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_cxXHJe6nvE1DRFRno4cixA_1FGiHjk2"; 
+
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const btnGuardar = document.getElementById('btnGuardar');
+        const fotosDinamicas = document.getElementById('fotos-dinamicas');
+        const listaCancionesUI = document.getElementById('listaCanciones');
+        const musica = document.getElementById('musica-fondo');
+        const btnMusica = document.getElementById('btn-musica');
+        const menuPlaylist = document.getElementById('menuPlaylist');
+
+        let idAventuraEditando = null;
+        let urlFotoActual = "";
+
+        // 🎵 CANCIONES
+        const listaCanciones = [
+            { id: "base", nombre: "Mi amor amor - Ray Sepúlveda", url: "assets/music/canción.mp3" },
+            { id: "cancion2", nombre: "Mi niña veneno - Ritchie", url: "assets/music/canción 2.mp3" },
+            { id: "cancion3", nombre: "Fotonovela - Ivan", url: "assets/music/canción 3.mp3" }
+        ];
+
+        let cancionActualId = listaCanciones[0].id;
+
+        // 🖼️ OBTENER Y ESCUCHAR FOTOS EN TIEMPO REAL
+        async function cargarAventuras() {
+            const { data, error } = await db.from('aventuras').select('*').order('id', { ascending: true });
+            if (error) {
+                console.error("Error cargando de Supabase:", error);
+                return;
+            }
+            
+            fotosDinamicas.innerHTML = "";
+            data.forEach(datos => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = 'photo-card';
+                tarjeta.style.position = 'relative';
+                tarjeta.innerHTML = `
+                    <button class="btn-editar-foto" style="
+                        position: absolute; top: 15px; right: 15px;
+                        background: rgba(255,255,255,0.9); border: 1px solid #ddd;
+                        border-radius: 50%; width: 32px; height: 32px; cursor: pointer;
+                        font-size: 0.9rem; display: flex; align-items: center; justify-content: center;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 10;
+                    ">✏️</button>
+                    <img src="${datos.url_foto}" alt="Foto de Aventura">
+                    <p>${datos.titulo || ''}</p>
+                    <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">${datos.subtitulo || ''}</p>
+                `;
+
+                tarjeta.querySelector('.btn-editar-foto').addEventListener('click', () => {
+                    idAventuraEditando = datos.id;
+                    urlFotoActual = datos.url_foto;
+                    document.getElementById('inputTitulo').value = datos.titulo || '';
+                    document.getElementById('inputSubtitulo').value = datos.subtitulo || '';
+                    document.getElementById('inputFoto').value = "";
+                    document.querySelector('#modalAventura h3').innerText = "Editar Aventura ✏️";
+                    document.getElementById('modalAventura').style.display = 'flex';
+                });
+
+                fotosDinamicas.appendChild(tarjeta);
+            });
+        }
+
+        // Escuchar cambios en tiempo real desde Supabase
+        db.channel('public:aventuras')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'aventuras' }, () => {
+              cargarAventuras();
+          })
+          .subscribe();
+
+        // Cargar fotos inicialmente
+        cargarAventuras();
+
+        // 🎵 REPRODUCTOR DE MÚSICA
+        function renderizarListaCanciones() {
+            listaCancionesUI.innerHTML = "";
+            listaCanciones.forEach((cancion) => {
+                const item = document.createElement('div');
+                const esActiva = cancion.id === cancionActualId;
+                item.className = `song-item ${esActiva ? 'active' : ''}`;
+                const iconoBoton = (esActiva && !musica.paused) ? "⏸️" : "▶️";
+
+                item.innerHTML = `
+                    <div class="song-info">🎵 <span>${cancion.nombre}</span></div>
+                    <button class="btn-play-pause-item">${iconoBoton}</button>
+                `;
+
+                const controlarAudio = () => {
+                    if (cancionActualId !== cancion.id) {
+                        cancionActualId = cancion.id;
+                        musica.src = cancion.url;
+                        musica.play().then(() => { btnMusica.innerText = "❤️"; }).catch(e => console.log(e));
+                    } else {
+                        if (musica.paused) {
+                            musica.play().then(() => { btnMusica.innerText = "❤️"; }).catch(e => console.log(e));
+                        } else {
+                            musica.pause();
+                            btnMusica.innerText = "🎵";
+                        }
+                    }
+                    renderizarListaCanciones();
+                };
+
+                item.querySelector('.song-info').addEventListener('click', controlarAudio);
+                item.querySelector('.btn-play-pause-item').addEventListener('click', controlarAudio);
+                listaCancionesUI.appendChild(item);
+            });
+        }
+
+        musica.addEventListener('play', renderizarListaCanciones);
+        musica.addEventListener('pause', renderizarListaCanciones);
+
+        btnMusica.addEventListener('click', () => {
+            menuPlaylist.classList.toggle('show');
+        });
+
+        // MODAL
+        document.getElementById('btnAbrirNuevaAventura').addEventListener('click', () => {
+            idAventuraEditando = null;
+            urlFotoActual = "";
+            document.getElementById('inputTitulo').value = "";
+            document.getElementById('inputSubtitulo').value = "";
+            document.getElementById('inputFoto').value = "";
+            document.querySelector('#modalAventura h3').innerText = "Nueva Aventura ❤️";
+            document.getElementById('modalAventura').style.display = 'flex';
+        });
+
+        document.getElementById('btnCancelarModal').addEventListener('click', () => {
+            document.getElementById('modalAventura').style.display = 'none';
+        });
+
+        // GUARDAR FOTO EN BUCKET DE SUPABASE
+        btnGuardar.addEventListener('click', async () => {
+            const file = document.getElementById('inputFoto').files[0];
+            const titulo = document.getElementById('inputTitulo').value;
+            const subtitulo = document.getElementById('inputSubtitulo').value;
+
+            if (!titulo || !subtitulo) { alert("Llena los campos de texto ❤️"); return; }
+            btnGuardar.innerText = "Guardar... ⏳";
+            btnGuardar.disabled = true;
+
+            try {
+                let finalFotoUrl = urlFotoActual;
+
+                if (file) {
+                    // Subir archivo al bucket 'fotos' en Supabase
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `${Date.now()}.${fileExt}`;
+                    
+                    const { data: uploadData, error: uploadError } = await db.storage
+                        .from('fotos')
+                        .upload(fileName, file);
+
+                    if (uploadError) throw uploadError;
+
+                    // Obtener URL Pública de la imagen
+                    const { data: urlData } = db.storage
+                        .from('fotos')
+                        .getPublicUrl(fileName);
+
+                    finalFotoUrl = urlData.publicUrl;
+                }
+
+                if (idAventuraEditando) {
+                    await db.from('aventuras').update({ titulo, subtitulo, url_foto: finalFotoUrl }).eq('id', idAventuraEditando);
+                } else {
+                    await db.from('aventuras').insert([{ titulo, subtitulo, url_foto: finalFotoUrl }]);
+                }
+
+                document.getElementById('modalAventura').style.display = 'none';
+                cargarAventuras();
+            } catch (error) {
+                console.error("Error en Supabase:", error);
+                alert("Error al guardar la aventura: " + error.message);
+            } finally {
+                btnGuardar.innerText = "Guardar";
+                btnGuardar.disabled = false;
+            }
+        });
+
+        musica.src = listaCanciones[0].url;
+        renderizarListaCanciones();
+
+        // Contador de días
+        const fechaInicio = new Date("2026-05-23T00:00:00");
+        function actualizarContador() {
+            const hoy = new Date();
+            document.getElementById('dias').innerText = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24));
+        }
+        actualizarContador();
+    </script>
+</body>
+</html>
