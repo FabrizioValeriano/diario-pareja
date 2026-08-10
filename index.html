@@ -23,27 +23,30 @@
         }
 
         .container {
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
             background: white;
             padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 80px;
         }
 
         h1 {
             color: #ff6b6b;
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         p.subtitle {
             font-style: italic;
             color: #888;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
+        /* CONTADOR */
         .counter-box {
             background: #fff0f0;
             padding: 15px;
@@ -53,14 +56,28 @@
         }
 
         .counter-box h3 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: #ff4757;
         }
 
-        .gallery {
-            margin-top: 20px;
+        .counter-box p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
         }
 
+        /* SECCIONES Y PESTAÑAS */
+        .section-title {
+            color: #ff6b6b;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* GALERÍA */
         .photo-card {
             background: #fcfcfc;
             padding: 10px;
@@ -98,12 +115,12 @@
             border: 2px dashed #ffb3b3;
             background: #fffafb;
             border-radius: 15px;
-            padding: 20px;
+            padding: 15px;
             color: #ff6b6b;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .btn-aventura:hover {
@@ -111,7 +128,88 @@
             transform: scale(1.01);
         }
 
-        /* Ventanas flotantes (Modales) */
+        /* SECCIÓN DE MENSAJES / CARTAS */
+        .messages-box {
+            background: #fffafb;
+            border: 1px solid #ffe3e3;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .messages-box textarea {
+            width: 100%;
+            height: 80px;
+            border: 1px solid #ffccd5;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            margin-bottom: 8px;
+        }
+
+        .messages-box input {
+            width: 100%;
+            border: 1px solid #ffccd5;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .btn-send-msg {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-send-msg:hover {
+            background: #ff4757;
+        }
+
+        .messages-list {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .message-card {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            font-size: 0.88rem;
+        }
+
+        .message-card .author {
+            font-weight: bold;
+            color: #ff6b6b;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .message-card .date {
+            color: #aaa;
+            font-weight: normal;
+            font-size: 0.75rem;
+        }
+
+        /* MODAL (AVENTURAS) */
         .modal {
             display: none;
             position: fixed;
@@ -176,13 +274,7 @@
             padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
         }
 
-        .footer-note {
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: #aaa;
-        }
-
-        /* 🎵 PLAYLIST PLAY/PAUSE INTERACTIVA 🎵 */
+        /* PLAYLIST */
         .playlist-menu {
             position: fixed;
             bottom: 90px;
@@ -197,7 +289,6 @@
             flex-direction: column;
             overflow: hidden;
             border: 1px solid #ffe3e3;
-            
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -217,9 +308,6 @@
             color: #ff6b6b;
             font-size: 0.9rem;
             border-bottom: 1px solid #ffb3b3;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .playlist-items {
@@ -237,19 +325,11 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            transition: background 0.2s;
         }
 
         .song-info {
             flex: 1;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .song-item:hover {
-            background: #fff5f5;
         }
 
         .song-item.active {
@@ -271,15 +351,20 @@
             align-items: center;
             justify-content: center;
         }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
     </style>
-    <!-- Carga del SDK de Supabase JS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <audio id="musica-fondo" loop></audio>
 
-    <!-- 🎵 PLAYLIST MENÚ 🎵 -->
+    <!-- 🎵 PLAYLIST -->
     <div class="playlist-menu" id="menuPlaylist">
         <div class="playlist-header">
             <span>Nuestras Canciones ❤️</span>
@@ -287,63 +372,65 @@
         <div class="playlist-items" id="listaCanciones"></div>
     </div>
 
-    <!-- Botón Flotante Principal -->
+    <!-- Botón Flotante Música -->
     <button id="btn-musica" style="
         position: fixed; bottom: 20px; right: 20px;
         background: #ff6b6b; color: white; border: none;
         border-radius: 50%; width: 60px; height: 60px; font-size: 1.6rem;
         cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000;
         display: flex; align-items: center; justify-content: center;
-        transition: transform 0.2s; -webkit-tap-highlight-color: transparent;
     ">🎵</button>
 
     <div class="container">
         <h1>Un pequeño detalle... ✨</h1>
         <p class="subtitle">De los mejores días y contando.</p>
 
+        <!-- CONTADOR DE DÍAS -->
         <div class="counter-box">
             <h3 id="dias">0</h3>
-            <p>Días desde nuestro primer beso.... Y aún no te aburres de mí XD (Mentira mi amor, no me dejes)</p>
+            <p>Días desde nuestro primer beso ❤️</p>
         </div>
 
-        <div class="gallery" id="contenedor-galeria">
+        <!-- SECCIÓN 1: GALERÍA DE FOTOS -->
+        <h2 class="section-title">📸 Nuestras Aventuras</h2>
+
+        <div class="gallery">
             <div class="photo-card">
-                <img src="assets/img/foto1.jpeg" alt="Caminata">
+                <img src="assets/img/foto1.jpeg" alt="Caminata" onerror="this.src='https://via.placeholder.com/300x200?text=Foto+1'">
                 <p>📍 Una caminata juntos por la noche.</p>
                 <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Agarrados de las manos.</p>
             </div>
             <div class="photo-card">
-                <img src="assets/img/foto2.jpeg" alt="Comiendo">
+                <img src="assets/img/foto2.jpeg" alt="Comiendo" onerror="this.src='https://via.placeholder.com/300x200?text=Foto+2'">
                 <p>🍔 Sentados.</p>
                 <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">3 horas decidiendo qué comer.</p>
             </div>
-            <div class="photo-card">
-                <img src="assets/img/foto3.jpeg" alt="Parque">
-                <p>🌳 Primera salida al parque.</p>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">No quería dejar de abrazarte ✨</p>
-            </div>
-            <div class="photo-card">
-                <img src="assets/img/foto4.jpeg" alt="Polera">
-                <p>👕 Tú con mi polera.</p>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Te queda mil veces mejor que a mí. ❤️</p>
-            </div>
-            <div class="photo-card">
-                <img src="assets/img/foto5.jpeg" alt="Bus">
-                <p>🚌 Viajando en bus juntos.</p>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">Cualquier viaje es corto si es contigo. 🗺️</p>
-            </div>
 
-            <!-- Aquí aparecerán las fotos subidas a Supabase -->
+            <!-- Fotos Dinámicas desde Supabase -->
             <div id="fotos-dinamicas"></div>
 
             <button class="btn-aventura" id="btnAbrirNuevaAventura">
-                [ Espacio reservado para nuestra próxima aventura ]
+                ➕ Agregar nuestra próxima aventura
             </button>
         </div>
+
+        <!-- SECCIÓN 2: MENSAJES Y NOTAS -->
+        <h2 class="section-title">✉️ Déjame un Mensaje</h2>
+
+        <div class="messages-box">
+            <input type="text" id="inputAutorMsg" placeholder="Tu nombre o apodo (ej. Tu novio/a)...">
+            <textarea id="inputTextoMsg" placeholder="Escribe algo lindo o un mensaje secreto aquí..."></textarea>
+            <button class="btn-send-msg" id="btnEnviarMsg">Enviar Mensaje ❤️</button>
+
+            <div class="messages-list" id="contenedor-mensajes">
+                <!-- Los mensajes cargados de Supabase aparecerán aquí -->
+            </div>
+        </div>
+
         <p class="footer-note">Hecho con amor y paciencia ❤️.</p>
     </div>
 
-    <!-- Formulario Aventuras -->
+    <!-- MODAL NUEVA FOTO/AVENTURA -->
     <div class="modal" id="modalAventura">
         <div class="modal-content">
             <h3>Nueva Aventura ❤️</h3>
@@ -361,65 +448,61 @@
     </div>
 
     <script>
-        // 🔑 CONFIGURACIÓN CON SUPABASE
-        // REEMPLAZA la clave si tu clave `anon` es distinta (debe empezar con eyJ...)
-        const SUPABASE_URL = "https://jesmcfekvsaddcijocfd.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_cxXHJe6nvE1DRFRno4cixA_1FGiHjk2"; 
+        // ==========================================
+        // 1. FECHA DEL CONTADOR (¡CAMBIA ESTA FECHA!)
+        // Formato: "AAAA-MM-DD"
+        // ==========================================
+        const FECHA_INICIO_STR = "2024-02-14"; // <-- Cambia "2024-02-14" por la fecha exacta de su inicio/primer beso
 
-        const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        // 📅 CONTADOR DE DÍAS (Sustituye la fecha con la de su primer beso: AAAA, MM-1, DD)
-        const fechaInicio = new Date(2023, 0, 15); // Ejemplo: 15 de Enero 2023 (Mes 0 = Enero)
         function calcularDias() {
+            const fechaInicio = new Date(FECHA_INICIO_STR + "T00:00:00");
             const hoy = new Date();
-            const diferenciaTiempo = hoy - fechaInicio;
-            const diasTranscurridos = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
-            document.getElementById("dias").textContent = diasTranscurridos > 0 ? diasTranscurridos : 0;
+            const diferenciaMs = hoy - fechaInicio;
+            const dias = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
+            document.getElementById("dias").textContent = dias > 0 ? dias : 0;
         }
         calcularDias();
 
-        // 📌 ELEMENTOS DOM
-        const btnGuardar = document.getElementById('btnGuardar');
-        const fotosDinamicas = document.getElementById('fotos-dinamicas');
-        const listaCancionesUI = document.getElementById('listaCanciones');
+        // ==========================================
+        // 2. CONFIGURACIÓN SUPABASE
+        // ==========================================
+        const SUPABASE_URL = "https://jesmcfekvsaddcijocfd.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_cxXHJe6nvE1DRFRno4cixA_1FGiHjk2"; 
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ==========================================
+        // 3. REPRODUCTOR Y PLAYLIST
+        // ==========================================
         const musica = document.getElementById('musica-fondo');
         const btnMusica = document.getElementById('btn-musica');
         const menuPlaylist = document.getElementById('menuPlaylist');
-        const modalAventura = document.getElementById('modalAventura');
-        const btnAbrirNuevaAventura = document.getElementById('btnAbrirNuevaAventura');
-        const btnCancelarModal = document.getElementById('btnCancelarModal');
+        const listaCancionesUI = document.getElementById('listaCanciones');
 
-        // 🎵 CANCIONES
         const listaCanciones = [
-            { id: "base", nombre: "Mi amor amor - Ray Sepúlveda", url: "assets/music/canción.mp3" },
-            { id: "cancion2", nombre: "Mi niña veneno - Ritchie", url: "assets/music/canción 2.mp3" },
-            { id: "cancion3", nombre: "Fotonovela - Ivan", url: "assets/music/canción 3.mp3" }
+            { id: "1", nombre: "Mi amor amor - Ray Sepúlveda", url: "assets/music/canción.mp3" },
+            { id: "2", nombre: "Mi niña veneno - Ritchie", url: "assets/music/canción 2.mp3" },
+            { id: "3", nombre: "Fotonovela - Ivan", url: "assets/music/canción 3.mp3" }
         ];
 
         let cancionActualId = listaCanciones[0].id;
         musica.src = listaCanciones[0].url;
 
-        // Renderizar Lista de Canciones
         function renderizarPlaylist() {
             listaCancionesUI.innerHTML = "";
             listaCanciones.forEach((cancion) => {
                 const item = document.createElement('div');
+                const esEstaSonando = (cancion.id === cancionActualId && !musica.paused);
                 item.className = `song-item ${cancion.id === cancionActualId ? 'active' : ''}`;
                 
-                const esEstaSonando = (cancion.id === cancionActualId && !musica.paused);
-
                 item.innerHTML = `
-                    <div class="song-info">
-                        <span>${cancion.nombre}</span>
-                    </div>
+                    <div class="song-info"><span>${cancion.nombre}</span></div>
                     <button class="btn-play-pause-item">${esEstaSonando ? '⏸' : '▶'}</button>
                 `;
 
                 item.querySelector('.song-info').addEventListener('click', () => reproducirCancion(cancion));
                 item.querySelector('.btn-play-pause-item').addEventListener('click', () => {
                     if (cancion.id === cancionActualId) {
-                        if (musica.paused) musica.play();
-                        else musica.pause();
+                        if (musica.paused) musica.play(); else musica.pause();
                         renderizarPlaylist();
                     } else {
                         reproducirCancion(cancion);
@@ -433,37 +516,43 @@
         function reproducirCancion(cancion) {
             cancionActualId = cancion.id;
             musica.src = cancion.url;
-            musica.play();
+            musica.play().catch(() => {});
             renderizarPlaylist();
         }
 
-        // Toggle Menú Playlist
-        btnMusica.addEventListener('click', () => {
-            menuPlaylist.classList.toggle('show');
-        });
+        btnMusica.addEventListener('click', () => menuPlaylist.classList.toggle('show'));
 
-        // 🖼️ OBTENER Y ESCUCHAR FOTOS EN TIEMPO REAL
+        // ==========================================
+        // 4. GALERÍA DE AVENTURAS (SUPABASE)
+        // ==========================================
+        const fotosDinamicas = document.getElementById('fotos-dinamicas');
+        const modalAventura = document.getElementById('modalAventura');
+        const btnAbrirNuevaAventura = document.getElementById('btnAbrirNuevaAventura');
+        const btnCancelarModal = document.getElementById('btnCancelarModal');
+        const btnGuardar = document.getElementById('btnGuardar');
+
         async function cargarAventuras() {
-            const { data, error } = await db.from('aventuras').select('*').order('id', { ascending: true });
-            if (error) {
-                console.error("Error cargando de Supabase:", error);
-                return;
-            }
-            
-            fotosDinamicas.innerHTML = "";
-            data.forEach(datos => {
-                const card = document.createElement('div');
-                card.className = 'photo-card';
-                card.innerHTML = `
-                    <img src="${datos.url_foto}" alt="${datos.titulo}">
-                    <p>📍 ${datos.titulo}</p>
-                    <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">${datos.subtitulo || ''}</p>
-                `;
-                fotosDinamicas.appendChild(card);
-            });
+            try {
+                const { data, error } = await db.from('aventuras').select('*').order('id', { ascending: true });
+                if (error) return;
+                
+                fotosDinamicas.innerHTML = "";
+                data.forEach(datos => {
+                    const card = document.createElement('div');
+                    card.className = 'photo-card';
+                    card.innerHTML = `
+                        <img src="${datos.url_foto}" alt="${datos.titulo}">
+                        <p>📍 ${datos.titulo}</p>
+                        <p style="font-size: 0.8rem; color: #888; margin-top: 2px;">${datos.subtitulo || ''}</p>
+                    `;
+                    fotosDinamicas.appendChild(card);
+                });
+            } catch (e) {}
         }
 
-        // 📤 SUBIR A SUPABASE (Storage + Tabla 'aventuras')
+        btnAbrirNuevaAventura.addEventListener('click', () => modalAventura.classList.add('active'));
+        btnCancelarModal.addEventListener('click', () => modalAventura.classList.remove('active'));
+
         btnGuardar.addEventListener('click', async () => {
             const fileInput = document.getElementById('inputFoto');
             const titulo = document.getElementById('inputTitulo').value.trim();
@@ -479,39 +568,27 @@
 
             try {
                 const file = fileInput.files[0];
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${Date.now()}.${fileExt}`;
+                const fileName = `${Date.now()}_${file.name}`;
 
-                // 1. Subir a Supabase Storage (asegúrate de crear el bucket 'fotos' en Supabase como público)
-                const { data: storageData, error: storageError } = await db.storage
-                    .from('fotos')
-                    .upload(fileName, file);
-
+                // Intentar subir a Supabase Storage bucket 'fotos'
                 let urlFoto = "";
-                if (storageError) {
-                    console.warn("Storage no configurado, se intentará guardar el archivo localmente:", storageError);
-                    // Fallback URL si no usas bucket
-                    urlFoto = URL.createObjectURL(file);
-                } else {
+                const { data: storageData, error: storageError } = await db.storage.from('fotos').upload(fileName, file);
+
+                if (!storageError) {
                     const { data: publicUrlData } = db.storage.from('fotos').getPublicUrl(fileName);
                     urlFoto = publicUrlData.publicUrl;
+                } else {
+                    urlFoto = URL.createObjectURL(file);
                 }
 
-                // 2. Insertar fila en la tabla 'aventuras'
-                const { error: dbError } = await db.from('aventuras').insert([
-                    { titulo: titulo, subtitulo: subtitulo, url_foto: urlFoto }
-                ]);
+                await db.from('aventuras').insert([{ titulo, subtitulo, url_foto: urlFoto }]);
 
-                if (dbError) throw dbError;
-
-                // Limpiar y cerrar
                 document.getElementById('inputTitulo').value = "";
                 document.getElementById('inputSubtitulo').value = "";
                 fileInput.value = "";
                 modalAventura.classList.remove('active');
 
                 cargarAventuras();
-
             } catch (err) {
                 alert("Error al guardar: " + err.message);
             } finally {
@@ -520,13 +597,65 @@
             }
         });
 
-        // Modales Open/Close
-        btnAbrirNuevaAventura.addEventListener('click', () => modalAventura.classList.add('active'));
-        btnCancelarModal.addEventListener('click', () => modalAventura.classList.remove('active'));
+        // ==========================================
+        // 5. SECCIÓN DE MENSAJES (SUPABASE)
+        // ==========================================
+        const contenedorMensajes = document.getElementById('contenedor-mensajes');
+        const btnEnviarMsg = document.getElementById('btnEnviarMsg');
 
-        // Cargar playlist y aventuras al inicio
+        async function cargarMensajes() {
+            try {
+                const { data, error } = await db.from('mensajes').select('*').order('id', { ascending: false });
+                if (error || !data) return;
+
+                contenedorMensajes.innerHTML = "";
+                data.forEach(msg => {
+                    const card = document.createElement('div');
+                    card.className = 'message-card';
+                    const fecha = msg.created_at ? new Date(msg.created_at).toLocaleDateString() : '';
+                    card.innerHTML = `
+                        <div class="author">
+                            <span>${msg.autor || 'Anónimo'}</span>
+                            <span class="date">${fecha}</span>
+                        </div>
+                        <div>${msg.texto}</div>
+                    `;
+                    contenedorMensajes.appendChild(card);
+                });
+            } catch (e) {}
+        }
+
+        btnEnviarMsg.addEventListener('click', async () => {
+            const autor = document.getElementById('inputAutorMsg').value.trim();
+            const texto = document.getElementById('inputTextoMsg').value.trim();
+
+            if (!texto) {
+                alert("Por favor escribe un mensaje antes de enviar.");
+                return;
+            }
+
+            btnEnviarMsg.innerText = "Enviando...";
+            btnEnviarMsg.disabled = true;
+
+            try {
+                await db.from('mensajes').insert([
+                    { autor: autor || "Alguien especial", texto: texto }
+                ]);
+
+                document.getElementById('inputTextoMsg').value = "";
+                cargarMensajes();
+            } catch (err) {
+                alert("No se pudo enviar el mensaje: " + err.message);
+            } finally {
+                btnEnviarMsg.innerText = "Enviar Mensaje ❤️";
+                btnEnviarMsg.disabled = false;
+            }
+        });
+
+        // Carga inicial
         renderizarPlaylist();
         cargarAventuras();
+        cargarMensajes();
     </script>
 </body>
 </html>
