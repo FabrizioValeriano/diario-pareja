@@ -297,9 +297,16 @@
         <h1>Un pequeño detalle... ✨</h1>
         <p class="subtitle">De los mejores días y contando.</p>
 
+        <!-- Primer contador (Primer beso) -->
         <div class="counter-box">
             <h3 id="dias">0</h3>
             <p>Días desde nuestro primer beso.... Y aún no te aburres de mí XD (Mentira mi amor, no me dejes)</p>
+        </div>
+
+        <!-- Segundo contador (Novios - 22 de Agosto) -->
+        <div class="counter-box">
+            <h3 id="dias-novios">0</h3>
+            <p>Días desde que somos oficialmente novios ❤️</p>
         </div>
 
         <div class="gallery" id="contenedor-galeria">
@@ -542,13 +549,18 @@
         musica.src = listaCanciones[0].url;
         renderizarListaCanciones();
 
-        // Contador de días
-        const fechaInicio = new Date("2026-05-23T00:00:00");
-        function actualizarContador() {
+        // Contadores de días
+        const fechaPrimerBeso = new Date("2026-05-23T00:00:00");
+        const fechaNovios = new Date("2026-08-22T00:00:00");
+
+        function actualizarContadores() {
             const hoy = new Date();
-            document.getElementById('dias').innerText = Math.floor((hoy - fechaInicio) / (1000 * 60 * 60 * 24));
+            // Días desde el primer beso
+            document.getElementById('dias').innerText = Math.floor((hoy - fechaPrimerBeso) / (1000 * 60 * 60 * 24));
+            // Días desde que son novios (22 de Agosto de 2026)
+            document.getElementById('dias-novios').innerText = Math.floor((hoy - fechaNovios) / (1000 * 60 * 60 * 24));
         }
-        actualizarContador();
+        actualizarContadores();
     </script>
 </body>
 </html>
